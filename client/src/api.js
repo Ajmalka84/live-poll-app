@@ -42,6 +42,19 @@ export async function unvote(pollId, optionId) {
   return res.json();
 }
 
+// export async function createPoll(question, options) {
+//   const res = await fetch(`${API_BASE}/api/polls`, {
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify({ question, options }),
+//   });
+//   if (!res.ok) {
+//     const body = await res.json().catch(() => ({}));
+//     throw new Error(body.error || "Create poll failed");
+//   }
+//   return res.json();
+// }
+
 export async function createPoll(question, options) {
   const res = await fetch(`${API_BASE}/api/polls`, {
     method: "POST",

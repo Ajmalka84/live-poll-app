@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { fetchPolls, unvote, vote } from "./api";
+import { createPoll, fetchPolls, unvote, vote } from "./api";
 import PollList from "./components/PollList";
 
 export default function App() {
   const [polls, setPolls] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showCreate, setShowCreate] = useState(false);
 
   useEffect(() => {
     let mounted = true;
@@ -95,6 +96,17 @@ export default function App() {
     }
   };
 
+  const handleCreate = async ({ question, options }) => {
+    try {
+      const newPoll = await createPoll(question, options);
+      // prepend new poll so it's visible immediately
+      setPolls((prev) => [newPoll, ...prev]);
+      setShowCreate(false);
+    } catch (err) {
+      alert("Create poll failed: " + err.message);
+    }
+  };
+
   return (
     <div className="app-shell">
       <header className="header">
@@ -111,6 +123,12 @@ export default function App() {
           <PollList polls={polls} onVote={onVote} onUnvote={onUnvote} />
         )}
       </main>
+      {showCreate && (
+        <CreatePollModal
+          onClose={() => setShowCreate(false)}
+          onCreate={handleCreate}
+        />
+      )}
 
       <footer className="footer">
         <small>Phase 2 — Voting UI • Backend: localhost:5001</small>
