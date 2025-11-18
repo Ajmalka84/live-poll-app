@@ -1,0 +1,112 @@
+/* ---------------------------------
+   Poll Card — refined design
+   Subtle glassy look + clean spacing
+---------------------------------- */
+
+.poll-card {
+  background: linear-gradient(180deg, rgba(84, 61, 61, 0.06), rgba(255, 255, 255, 0.03));
+  border-radius: 16px;
+  padding: 20px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 20px rgba(2, 6, 23, 0.6);
+  backdrop-filter: blur(8px);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.poll-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(2, 6, 23, 0.7);
+}
+
+.question {
+  margin: 0 0 14px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #ffffff;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Option Buttons */
+.option-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--card);
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.option-btn:hover {
+  background: rgba(14, 165, 164, 0.1);
+  border-color: rgba(14, 165, 164, 0.3);
+  transform: translateY(-2px);
+}
+
+.option-btn:active {
+  transform: scale(0.98);
+}
+
+.option-btn[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.opt-text {
+  font-size: 0.95rem;
+}
+
+.opt-votes {
+  font-size: 0.9rem;
+  color: var(--muted);
+  padding-left: 8px;
+}
+
+/* Vote animation feedback */
+.option-btn.voting {
+  border-color: rgba(14, 165, 164, 0.8);
+  animation: pulse 0.6s ease forwards;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(14, 165, 164, 0.5);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(14, 165, 164, 0);
+    transform: scale(1.03);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(14, 165, 164, 0);
+    transform: scale(1);
+  }
+}
+
+/* Responsive touch targets */
+@media (max-width: 480px) {
+  .poll-card {
+    padding: 16px 12px;
+  }
+
+  .option-btn {
+    padding: 10px 12px;
+  }
+
+  .question {
+    font-size: 1rem;
+  }
+}
+
