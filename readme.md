@@ -32,16 +32,6 @@ npm start
 
 Visit `http://localhost:3000` in your browser.
 
-## Project Structure
-
-```
-live-poll-app/
-├── src/
-├── public/
-├── routes/
-└── package.json
-```
-
 ## Contributing
 
 Pull requests are welcome. Please follow the existing code style.
