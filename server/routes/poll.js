@@ -1,7 +1,7 @@
 // routes/polls.js
 const express = require("express");
 const router = express.Router();
-const Poll = require("../models/poll");
+const Poll = require("../models/Poll");
 
 // GET /api/polls - list all polls
 router.get("/", async (req, res) => {

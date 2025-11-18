@@ -1,20 +1,20 @@
-export const API_BASE = "http://localhost:5001";
+export const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
 
 export async function fetchPolls() {
-  const res = await fetch(`${API_BASE}/api/polls`);
+  const res = await fetch(`${API_URL}/api/polls`);
   if (!res.ok) throw new Error("Failed to fetch polls");
   return res.json();
 }
 
 export async function fetchPoll(id) {
-  const res = await fetch(`${API_BASE}/api/polls/${id}`);
+  const res = await fetch(`${API_URL}/api/polls/${id}`);
   if (!res.ok) throw new Error("Failed to fetch poll");
   return res.json();
 }
 
 export async function vote(pollId, optionId) {
   const res = await fetch(
-    `${API_BASE}/api/polls/${pollId}/options/${optionId}/vote`,
+    `${API_URL}/api/polls/${pollId}/options/${optionId}/vote`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -29,7 +29,7 @@ export async function vote(pollId, optionId) {
 
 export async function unvote(pollId, optionId) {
   const res = await fetch(
-    `${API_BASE}/api/polls/${pollId}/options/${optionId}/unvote`,
+    `${API_URL}/api/polls/${pollId}/options/${optionId}/unvote`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -43,7 +43,7 @@ export async function unvote(pollId, optionId) {
 }
 
 // export async function createPoll(question, options) {
-//   const res = await fetch(`${API_BASE}/api/polls`, {
+//   const res = await fetch(`${API_URL}/api/polls`, {
 //     method: "POST",
 //     headers: { "Content-Type": "application/json" },
 //     body: JSON.stringify({ question, options }),
@@ -56,7 +56,7 @@ export async function unvote(pollId, optionId) {
 // }
 
 export async function createPoll(question, options) {
-  const res = await fetch(`${API_BASE}/api/polls`, {
+  const res = await fetch(`${API_URL}/api/polls`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ question, options }),
