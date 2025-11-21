@@ -96,46 +96,46 @@ router.post("/:pollId/options/:optionId/unvote", async (req, res) => {
 // });
 
 // POST /api/polls - create a new poll (question + options[])
-// router.post("/", async (req, res) => {
-//   try {
-//     const { question, options } = req.body;
+router.post("/", async (req, res) => {
+  try {
+    const { question, options } = req.body;
 
-//     // Validation
-//     if (!question || typeof question !== "string" || !question.trim()) {
-//       return res.status(400).json({ error: "Question is required" });
-//     }
-//     if (!Array.isArray(options) || options.length < 2) {
-//       return res
-//         .status(400)
-//         .json({ error: "At least two options are required" });
-//     }
+    // Validation
+    if (!question || typeof question !== "string" || !question.trim()) {
+      return res.status(400).json({ error: "Question is required" });
+    }
+    if (!Array.isArray(options) || options.length < 2) {
+      return res
+        .status(400)
+        .json({ error: "At least two options are required" });
+    }
 
-//     // Clean options: ensure strings & non-empty, limit duplicates
-//     const cleaned = options
-//       .map((o) => (typeof o === "string" ? o.trim() : ""))
-//       .filter((o, i, arr) => o && arr.indexOf(o) === i)
-//       .slice(0, 20); // safety cap (max 20 options)
+    // Clean options: ensure strings & non-empty, limit duplicates
+    const cleaned = options
+      .map((o) => (typeof o === "string" ? o.trim() : ""))
+      .filter((o, i, arr) => o && arr.indexOf(o) === i)
+      .slice(0, 20); // safety cap (max 20 options)
 
-//     if (cleaned.length < 2) {
-//       return res
-//         .status(400)
-//         .json({ error: "Provide at least two unique, non-empty options" });
-//     }
+    if (cleaned.length < 2) {
+      return res
+        .status(400)
+        .json({ error: "Provide at least two unique, non-empty options" });
+    }
 
-//     // Create poll document
-//     const poll = new Poll({
-//       question: question.trim(),
-//       options: cleaned.map((text) => ({ text })),
-//     });
+    // Create poll document
+    const poll = new Poll({
+      question: question.trim(),
+      options: cleaned.map((text) => ({ text })),
+    });
 
-//     await poll.save();
+    await poll.save();
 
-//     res.status(201).json(poll);
-//   } catch (err) {
-//     console.error("Create poll error:", err);
-//     res.status(500).json({ error: "Server error" });
-//   }
-// });
+    res.status(201).json(poll);
+  } catch (err) {
+    console.error("Create poll error:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
 
 // POST /api/polls/:pollId/options/:optionId/vote
 router.post("/:pollId/options/:optionId/vote", async (req, res) => {
